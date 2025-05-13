@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useGame } from "@/lib/stores/useGame";
 import { useAudio } from "@/lib/stores/useAudio";
 import { Button } from "./button";
@@ -15,7 +15,9 @@ export function Interface() {
   useEffect(() => {
     if (phase === "ready") {
       const handleClick = () => {
-        document.activeElement?.blur(); // Remove focus from any button
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
         const event = new KeyboardEvent("keydown", { code: "Space" });
         window.dispatchEvent(event);
       };
