@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Modern UI variables */
+  :root {
+    --duck-yellow: #FFD700;
+    --grass-green: #4CAF50;
+    --water-blue: #3498DB;
+    --sky-blue: #F0F8FF;
+    --accent-red: #FF6B6B;
+    
+    /* Theme colors */
+    --background: var(--sky-blue);
+    --foreground: #333333;
+    --primary: var(--duck-yellow);
+    --primary-foreground: #000000;
+    --secondary: var(--grass-green);
+    --secondary-foreground: #FFFFFF;
+    --accent: var(--accent-red);
+    --accent-foreground: #FFFFFF;
+    
+    --border: var(--grass-green);
+    --input: #FFFFFF;
+    --ring: var(--duck-yellow);
+    
+    --radius: 0.5rem;
+  }
+}
+
+/* Playful font: Comic Sans fallback if Nunito isn't available */
+.font-nunito {
+  font-family: 'Nunito', 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+}
+
+/* Canvas styling */
+canvas {
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Modern button styles */
+.duck-btn {
+  @apply py-2 px-5 rounded-full font-bold transition-all duration-200 shadow-md 
+         transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.duck-btn-primary {
+  @apply bg-gradient-to-r from-yellow-400 to-yellow-500 text-slate-800 
+         hover:from-yellow-500 hover:to-yellow-600 focus:ring-yellow-400;
+}
+
+.duck-btn-secondary {
+  @apply bg-gradient-to-r from-green-500 to-green-600 text-white 
+         hover:from-green-600 hover:to-green-700 focus:ring-green-400;
+}
+
+.duck-btn-accent {
+  @apply bg-gradient-to-r from-red-500 to-red-600 text-white 
+         hover:from-red-600 hover:to-red-700 focus:ring-red-400;
+}
+
+/* Form input styles */
+.duck-input {
+  @apply border border-gray-300 rounded-lg p-2 w-full shadow-sm
+         focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400
+         transition-all duration-200;
+}
+
+/* Custom classes for the game */
+.race-track {
+  @apply rounded-xl relative overflow-hidden;
+  background-image: linear-gradient(to bottom, 
+    rgba(52, 152, 219, 0.9) 15%, 
+    rgba(76, 175, 80, 0.9) 15%, 
+    rgba(76, 175, 80, 0.9) 100%
+  );
+  min-height: 400px;
+}
+
+/* Water effect for race track */
+.water-effect {
+  position: relative;
+}
+
+.water-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 15%;
+  background: rgba(52, 152, 219, 0.9);
+  z-index: 1;
+}
+
+.water-effect::after {
+  content: "";
+  position: absolute;
+  top: 13%;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 30' preserveAspectRatio='none'%3E%3Cpath d='M0,0V15C300,30,600,0,900,15c90,4.5,200,4.5,300,0V0Z' fill='%233498DB'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  z-index: 2;
+}
+
+/* Glass effect for UI elements */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Animation keyframes */
+@keyframes swimming {
+  0% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-3px) rotate(3deg); }
+  50% { transform: translateY(0px) rotate(0deg); }
+  75% { transform: translateY(3px) rotate(-3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.swimming {
+  animation: swimming 1s infinite;
+}
+
+@keyframes celebration {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2) rotate(5deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.celebrating {
+  animation: celebration 0.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.bounce {
+  animation: bounce 0.8s ease infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(76, 175, 80, 0.7);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(76, 175, 80, 0.9);
+}
+
+/* Custom scrollbar for specific elements */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.5);
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 215, 0, 0.7);
+}

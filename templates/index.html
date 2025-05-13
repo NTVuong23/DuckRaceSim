@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đua Vịt - Duck Racing Game (Python Flask)</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Thêm font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Đua Vịt</h1>
+            <p>Trò chơi Đua Vịt vui nhộn! (Python Flask)</p>
+        </header>
+
+        <main>
+            <div class="game-container">
+                <div class="control-panel">
+                    <h2>Bảng Điều Khiển</h2>
+                    <div class="control-buttons">
+                        <button id="start-race" class="btn btn-primary">Bắt Đầu Đua</button>
+                        <button id="reset-race" class="btn btn-secondary">Làm Mới</button>
+                    </div>
+                    <div class="race-info">
+                        <div class="race-time">
+                            <span>Thời gian còn lại: </span>
+                            <span id="countdown">10s</span>
+                        </div>
+                        <div class="race-status">
+                            <span>Trạng thái: </span>
+                            <span id="status">Sẵn sàng</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="racing-track">
+                    <div id="finish-line" class="finish-line">
+                        <div class="finish-text">ĐÍCH</div>
+                    </div>
+                    <canvas id="duck-canvas" width="800" height="400"></canvas>
+                </div>
+
+                <div class="duck-settings">
+                    <h2>Những Con Vịt Đua (<span id="duck-count">0</span>/100)</h2>
+                    
+                    <div class="duck-actions">
+                        <button id="add-duck" class="btn btn-success">Thêm Vịt</button>
+                        <button id="bulk-input" class="btn btn-info">Nhập Hàng Loạt</button>
+                    </div>
+                    
+                    <div class="duck-list" id="duck-list">
+                        <!-- Duck items will be generated here -->
+                    </div>
+                    
+                    <div class="race-settings">
+                        <div class="setting-group">
+                            <label for="race-duration">Thời gian đua (giây):</label>
+                            <input type="number" id="race-duration" min="1" max="60" value="10">
+                        </div>
+                        
+                        <div class="setting-group">
+                            <label for="winner-select">Chọn vịt thắng:</label>
+                            <select id="winner-select">
+                                <option value="none">Kết quả ngẫu nhiên</option>
+                                <!-- Winner options will be generated here -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="results-container" class="results-container hidden">
+                <h2>Kết Quả Cuộc Đua</h2>
+                <div id="results-list" class="results-list">
+                    <!-- Results will be generated here -->
+                </div>
+                <button id="close-results" class="btn btn-primary">Đóng</button>
+            </div>
+
+            <!-- Modal for bulk input -->
+            <div id="bulk-modal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Nhập Hàng Loạt Tên Vịt</h2>
+                    <p>Nhập mỗi tên vịt trên một dòng. Tối đa 100 con vịt.</p>
+                    <textarea id="bulk-names" rows="10" placeholder="Nhập tên vịt, mỗi tên một dòng:
+Vịt Vàng
+Vịt Donald
+Scrooge
+Huey
+Dewey
+Louie"></textarea>
+                    <div class="modal-actions">
+                        <button id="cancel-bulk" class="btn btn-secondary">Hủy Bỏ</button>
+                        <button id="submit-bulk" class="btn btn-success">Nhập Tên</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Trò Chơi Đua Vịt | Phiên bản Python Flask</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/duck.js"></script>
+</body>
+</html>
